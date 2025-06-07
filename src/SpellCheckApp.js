@@ -19,16 +19,15 @@ function SpellCheckApp() {
     // Split text into words
     const words = text.split(" ");
 
-    // Map and find the first correction
     let firstCorrection = "";
-    const correctedWords = words.map((word, index) => {
+    for (let word of words) {
       const lowerWord = word.toLowerCase();
       const corrected = customDictionary[lowerWord];
-      if (!firstCorrection && corrected && corrected !== word) {
+      if (corrected && corrected !== word) {
         firstCorrection = corrected;
+        break;
       }
-      return corrected || word;
-    });
+    }
 
     setSuggestedText(firstCorrection);
   };
